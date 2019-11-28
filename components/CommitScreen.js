@@ -5,7 +5,7 @@ export default class CommitScreen extends Component {
   static navigationOptions = ({navigation}) => {
     let name = navigation.getParam('name');
     return {
-      title: name
+      title: `${name} commits`
     };
   };
   constructor(props) {
@@ -14,7 +14,7 @@ export default class CommitScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{this.props.navigation.state.params.name}'s repositories</Text>
+        <Text>Commits here</Text>
       </View>
     )
   }
@@ -26,7 +26,4 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     margin: 10
   },
-  title: {
-    fontSize: 30
-  }
 })

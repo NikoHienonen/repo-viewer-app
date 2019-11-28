@@ -23,7 +23,7 @@ export default class RepoScreen extends Component {
           />
           <Button
             title="Search"
-            onPress={() => navigate('Commits', {name: 'Vincit'})}
+            onPress={() => navigate('Commits', {name: 'Repository'})}
             style={styles.button}
           />
         </View>
