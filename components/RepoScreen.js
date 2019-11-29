@@ -1,15 +1,46 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 
+import RepoList from './RepoList';
+import RepoModel from './Models/RepoModel';
+
 export default class RepoScreen extends Component {
   static navigationOptions = {
     title: 'Repo Viewer App',
   };
   state = {
-    inputValue: ""
+    inputValue: "Vincit",
+    searching: false,
+    url: "https://api.github.com/users/",
+    repos: []
   }
+  //{() => navigate('Commits', {name: 'Repository'})}
   onChangeText = text => {
     this.setState({inputValue: text});
+  }
+  searchForUser = () => {
+    if(this.state.inputValue) {
+      this.setState({searching: true});
+      let fetchUrl = this.state.url+this.state.inputValue;
+      fetch(fetchUrl)
+        .then(res => res.json())
+          .then(result => this.searchForRepos(result.repos_url))
+            .catch(error => console.log(error));
+    }
+  }
+  searchForRepos = (repoUrl) => {
+    if(repoUrl){
+      fetch(repoUrl)
+        .then(res => res.json())
+          .then(result => {
+            let repos = this.repoArrayCreator(result);
+            this.setState({repos, searching: false});
+          })
+            .catch(error => console.log(error))
+    }
+  }
+  repoArrayCreator = (repos) => {
+    return repos.map(repo => new RepoModel(repo.id, repo.full_name, repo.commits_url));
   }
   render() {
     const {navigate} = this.props.navigation;
@@ -23,11 +54,12 @@ export default class RepoScreen extends Component {
           />
           <Button
             title="Search"
-            onPress={() => navigate('Commits', {name: 'Repository'})}
-            style={styles.button}
+            onPress={() => this.searchForUser()}
           />
         </View>
-        <View style={styles.list}></View>
+        <View style={styles.list}>
+          <RepoList searchActive={this.state.searching} repos={this.state.repos}/>
+        </View>
       </View>
     );
   }
@@ -49,9 +81,9 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     lineHeight: 20,
   },
-  button: {
-  },
   list: {
-    backgroundColor: 'maroon'
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 })
