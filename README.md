@@ -5,6 +5,7 @@
 * [Technologies](#technologies) 
 * [Features](#features) 
 * [Status](#status) 
+* [What I learned](#what-i-learned) 
 * [Contact](#contact) 
 
 ## General info 
@@ -19,10 +20,18 @@ username and in the second you can view the commits of the repositories.
 
 ## Features
 List of features ready 
-* No features yet :O
+*Search for a user and display their repositories
+*By clicking a repository, see the ten latest commits of said repository
   
 ## Status 
-Project is: work in progress 
+Project is finished
+
+## What I learned
+From the last project I made (Iguana Weather App) I noticed that I tend to try to slam my way through problems
+by just trying every possible solution in a random order. This has proven to be very ineffective and time- and 
+mental energy-consuming, so I tried to stay mindful of the moments when I try to jam my way through, I would sit
+back, take my notebook and  try to reason the problem down in parts. I'm very happy to notice that I can work
+more efficiently because of this and I feel that I've grown as a dev and also a person by this simple act.
 
 ## Contact 
 
