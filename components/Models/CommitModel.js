@@ -1,4 +1,5 @@
 export default class CommitModel {
+  //Model for the data that we need from the commits.
   constructor(name, date, commitMsg, avatar) {
     this.name = name;
     this.date = this.dateFormat(date)

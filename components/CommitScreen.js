@@ -14,7 +14,7 @@ export default class CommitScreen extends Component {
   state= {
     msg: 'Commits',
     data: [],
-    searching: false
+    searching: true
   }
   componentDidMount(){
     if(this.state.data.length === 0) {
@@ -25,8 +25,6 @@ export default class CommitScreen extends Component {
     const { commitUrl } = this.props.navigation.getParam('repo');
     let cuttedUrl = commitUrl.replace('{/sha}', '');
     if(cuttedUrl) {
-      console.log('fetching')
-      this.setState({searching: true});
       fetch(cuttedUrl)
         .then(res => res.json())
           .then(result => {

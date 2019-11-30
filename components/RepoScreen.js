@@ -33,6 +33,9 @@ export default class RepoScreen extends Component {
           .then(result => this.searchForRepos(result.repos_url))
             .catch(error => console.log(error));
     }
+    else{
+      this.setState({msg: 'Please input a username'})
+    }
   }
   searchForRepos = (repoUrl) => {
     if(repoUrl){
@@ -44,7 +47,7 @@ export default class RepoScreen extends Component {
           })
             .catch(error => console.log(error))
     } else {
-      this.setState({searching: false, msg: `No user found for '${this.state.inputValue}'`});
+      this.setState({searching: false, msg: `No user found for '${this.state.inputValue}'`, repos: []});
     }
   }
   repoArrayCreator = (repos) => {

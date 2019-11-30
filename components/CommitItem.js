@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
 export default function CommitItem(item) {
+  //A function to render the commit-items in the commit-flatlist.
   return (
     <View style={styles.card}>
         <View style={styles.cardHeader}>
@@ -28,9 +29,9 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.5,
     shadowRadius: 1,
 
     elevation: 1,

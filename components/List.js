@@ -5,6 +5,10 @@ import RepoItem from './RepoItem';
 import CommitItem from './CommitItem';
 
 export default class List extends Component {
+  /*
+  A simple class that will determine whether it should render a flatlist of repositories,
+  a flatlist of commits or an activityIndicator bythe props it is given.
+  */
   renderItem = (item) => {
     if(item.avatar_url){console.log(item.avatar_url)};
     return this.props.type === 'repo'
