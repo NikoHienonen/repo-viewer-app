@@ -1,5 +1,5 @@
 # Repo Viewer App 
-> An app to search for users on Github and review their repositories 
+> An app to search for repositories on Github by user, and see the ten latest commits of said repo.
 ## Table of contents 
 * [General info](#general-info) 
 * [Technologies](#technologies) 
