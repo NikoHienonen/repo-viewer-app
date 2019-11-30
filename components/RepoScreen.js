@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Keyboard, Button, TextInput } from 'react-native';
 
-import RepoList from './RepoList';
+import List from './List';
 import RepoModel from './Models/RepoModel';
 
 export default class RepoScreen extends Component {
@@ -9,17 +9,23 @@ export default class RepoScreen extends Component {
     title: 'Repo Viewer App',
   };
   state = {
-    inputValue: "Vincit",
+    inputValue: '',
     searching: false,
-    url: "https://api.github.com/users/",
-    repos: []
+    url: 'https://api.github.com/users/',
+    repos: [],
+    msg: 'Search for user'
   }
   //{() => navigate('Commits', {name: 'Repository'})}
   onChangeText = text => {
     this.setState({inputValue: text});
   }
+  navigateToCommitScreen = (repo) => {
+    const {navigate} = this.props.navigation;
+    navigate('Commits', {repo: repo});
+  }
   searchForUser = () => {
     if(this.state.inputValue) {
+      Keyboard.dismiss();
       this.setState({searching: true});
       let fetchUrl = this.state.url+this.state.inputValue;
       fetch(fetchUrl)
@@ -37,29 +43,29 @@ export default class RepoScreen extends Component {
             this.setState({repos, searching: false});
           })
             .catch(error => console.log(error))
+    } else {
+      this.setState({searching: false, msg: `No user found for '${this.state.inputValue}'`});
     }
   }
   repoArrayCreator = (repos) => {
     return repos.map(repo => new RepoModel(repo.id, repo.full_name, repo.commits_url));
   }
   render() {
-    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
             onChangeText={text => this.onChangeText(text)}
-            placeholder="Search for user..."
+            placeholder='Search for user...'
           />
           <Button
-            title="Search"
+            title='Search'
             onPress={() => this.searchForUser()}
           />
         </View>
-        <View style={styles.list}>
-          <RepoList searchActive={this.state.searching} repos={this.state.repos}/>
-        </View>
+        <List searchActive={this.state.searching} data={this.state.repos} msg={this.state.msg}
+        navigateToCommitScreen={this.navigateToCommitScreen} type='repo'/>
       </View>
     );
   }
@@ -80,10 +86,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5,
     lineHeight: 20,
-  },
-  list: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
 })
