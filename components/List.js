@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, FlatList, ActivityIndicator, Image } from 'react-native';
+import { StyleSheet, View, Text, FlatList, ActivityIndicator } from 'react-native';
 
 import RepoItem from './RepoItem';
 import CommitItem from './CommitItem';
